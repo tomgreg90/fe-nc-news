@@ -1,0 +1,17 @@
+article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+p {
+  width: 500px;
+  border: 5px solid salmon;
+  font-family: cursive;
+  font-style: URW Chancery L;
+  padding: 10px;
+}
+.title {
+  color: hotpink;
+  border-bottom: 3px solid hotpink;
+}
