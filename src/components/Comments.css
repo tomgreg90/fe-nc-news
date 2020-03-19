@@ -4,3 +4,7 @@
 .commentData {
   color: lightseagreen;
 }
+.cannotDelete {
+  color: red;
+  display: block;
+}

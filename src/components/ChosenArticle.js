@@ -4,12 +4,14 @@ import TopicSelect from "./TopicSelect";
 import "./ChosenArticle.css";
 import ErrorPage from "./ErrorPage";
 import { Link } from "@reach/router";
+import Loading from "./Loading";
 
 export default class ChosenArticle extends Component {
   state = {
     article: {},
     hasError: false,
-    error: null
+    error: null,
+    isLoading: true
   };
 
   render() {
@@ -17,7 +19,9 @@ export default class ChosenArticle extends Component {
     return (
       <div>
         <TopicSelect />
-        {this.state.hasError ? (
+        {this.state.isLoading ? (
+          <Loading />
+        ) : this.state.hasError ? (
           <ErrorPage error={this.state.error} />
         ) : (
           <article className="myArticle">
@@ -47,10 +51,14 @@ export default class ChosenArticle extends Component {
       .then(({ data }) => {
         console.log(data);
         const article = data.article;
-        this.setState({ article, hasError: false });
+        this.setState({ article, hasError: false, isLoading: false });
       })
       .catch(err => {
-        this.setState({ hasError: true, error: err.response });
+        this.setState({
+          hasError: true,
+          error: err.response,
+          isLoading: false
+        });
       });
   }
 }
