@@ -4,7 +4,7 @@ article {
   align-items: center;
   justify-content: center;
 }
-p {
+.body {
   width: 500px;
   border: 5px solid salmon;
   font-family: cursive;

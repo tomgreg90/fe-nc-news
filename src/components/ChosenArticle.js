@@ -24,7 +24,7 @@ export default class ChosenArticle extends Component {
             <h3 className="title">{article.title}</h3>
             <h5>By {article.author}</h5>
             <h5>Created at {article.created_at}</h5>
-            <p>{article.body}</p>
+            <p className="body">{article.body}</p>
             <h5>Comment count: {article.comment_count}</h5>
             <h5>
               Click{" "}

@@ -9,13 +9,16 @@ import Comments from "./components/Comments";
 function App() {
   return (
     <div>
-      <Header />
-      <Router>
-        <Articles path="/articles" />
-        <Articles path="/articles/:topic" />
-        <ChosenArticle path="/articlesById/:article_id" />
-        <Comments path="/articlesById/:article_id/comments" />
-      </Router>
+      <div>
+        <Header />
+        <Router>
+          <Articles path="/articles" />
+          <Articles path="/articles/:topic" />
+
+          <ChosenArticle path="/articlesById/:article_id" />
+          <Comments path="/articlesById/:article_id/comments" />
+        </Router>
+      </div>
     </div>
   );
 }

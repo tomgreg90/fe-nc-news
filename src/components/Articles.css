@@ -1,15 +1,19 @@
 li {
   list-style-type: none;
   padding: 10px;
-
+  border: solid salmon 5px;
   margin: 10px;
   width: 500px;
+  background-color: white;
 }
 ul {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 60%;
   text-align: center;
   list-style-position: inside;
+
+  margin: auto;
+  margin-top: 50px;
 }
