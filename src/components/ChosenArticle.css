@@ -10,8 +10,20 @@ article {
   font-family: cursive;
   font-style: URW Chancery L;
   padding: 10px;
+  background-color: white;
 }
 .title {
   color: hotpink;
   border-bottom: 3px solid hotpink;
+  background-color: white;
+  padding: 20px;
+}
+.comments {
+  background-color: white;
+}
+.votes {
+  background-color: white;
+}
+button {
+  display: inline;
 }

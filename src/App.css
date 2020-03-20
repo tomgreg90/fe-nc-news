@@ -3,3 +3,8 @@ body {
   background-size: cover;
   background-attachment: fixed;
 }
+.myApp {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

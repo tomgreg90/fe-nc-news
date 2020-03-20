@@ -36,3 +36,13 @@ export const deleteComment = id => {
     `https://tomgreg-nc-news.herokuapp.com/api/comments/${id}`
   );
 };
+
+export const increaseVotes = (id, section) => {
+  return axios
+    .patch(`https://tomgreg-nc-news.herokuapp.com/api/${section}/1000`, {
+      inc_votes: 1
+    })
+    .then(({ data }) => {
+      return data;
+    });
+};

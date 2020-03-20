@@ -16,7 +16,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="myApp">
         <Header />
         <LoginForm
           createNewUser={this.createNewUser}
@@ -24,7 +24,7 @@ export default class App extends Component {
           loggedInAs={this.state.loggedInAs}
         />
         <Router>
-          <Articles path="/articles" />
+          <Articles path="/" />
           <Articles path="/articles/:topic" />
 
           <ChosenArticle path="/articlesById/:article_id" />

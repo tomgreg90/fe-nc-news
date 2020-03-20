@@ -3,14 +3,17 @@ import { fetchComments, postComment, deleteComment } from "../api";
 import "./Comments.css";
 import TopicSelect from "./TopicSelect";
 import PostComment from "./PostComment";
+import { increaseVotes } from "../api";
+import VotingError from "./VotingError";
 
 export default class Comments extends Component {
   state = {
     comments: [],
     hasError: false,
     error: null,
-
-    cannotDeleteComment: null
+    votingError: false,
+    cannotDeleteComment: null,
+    errorComment: null
   };
   render() {
     return (
@@ -43,6 +46,22 @@ export default class Comments extends Component {
                     Cannot delete comments by other users!!
                   </h5>
                 )}
+                <div>
+                  <h5>
+                    Vote for this comment?{" "}
+                    <button
+                      onClick={() => {
+                        this.upVoteComment(comment.comment_id);
+                      }}
+                    >
+                      Yes
+                    </button>
+                  </h5>
+                </div>
+                {this.state.votingError &&
+                  this.state.errorComment === comment.comment_id && (
+                    <VotingError removeMessage={this.removeMessage} />
+                  )}
               </li>
             );
           })}
@@ -52,6 +71,7 @@ export default class Comments extends Component {
   }
   componentDidMount() {
     fetchComments(this.props.article_id).then(({ comments }) => {
+      console.log(comments);
       this.setState({ comments });
     });
   }
@@ -85,5 +105,30 @@ export default class Comments extends Component {
     } else {
       this.setState({ cannotDeleteComment: comment_id });
     }
+  };
+
+  upVoteComment = id => {
+    let commentIndex;
+    for (let i = 0; i < this.state.comments.length; i++) {
+      if (this.state.comments[i].comment_id === id) {
+        commentIndex = i;
+      }
+    }
+    increaseVotes(id, "comments").catch(err => {
+      this.setState({ votingError: true, errorComment: id });
+      this.setState(prevState => {
+        prevState.comments[commentIndex].votes -= 1;
+        return { comments: prevState.comments };
+      });
+    });
+    this.setState({ votingError: false });
+    this.setState(prevState => {
+      prevState.comments[commentIndex].votes += 1;
+      return { comments: prevState.comments };
+    });
+  };
+
+  removeMessage = () => {
+    this.setState({ votingError: false });
   };
 }

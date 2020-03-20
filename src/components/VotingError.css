@@ -1,0 +1,11 @@
+.message {
+  color: red;
+  background-color: white;
+  padding: 5px;
+  display: inline-block;
+  border: solid red 5px;
+  border-radius: 10px;
+}
+.button {
+  border-radius: 8px;
+}
