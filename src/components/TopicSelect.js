@@ -7,7 +7,7 @@ export default class TopicSelect extends Component {
     return (
       <div>
         <h5>Select a topic:</h5>
-        <Link to="/articles">
+        <Link to="/">
           <h5>All</h5>
         </Link>
         <Link to="/articles/coding">

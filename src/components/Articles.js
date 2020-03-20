@@ -73,8 +73,8 @@ export default class Articles extends Component {
         });
     }
   }
-  fetchSortedArticles = (topic, sort_by) => {
-    fetchArticles(topic, sort_by).then(articles => {
+  fetchSortedArticles = (topic, sort_by, order) => {
+    fetchArticles(topic, sort_by, order).then(articles => {
       this.setState({ articles });
     });
   };
