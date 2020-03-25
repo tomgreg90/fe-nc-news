@@ -5,6 +5,7 @@ import Articles from "./components/Articles";
 import ChosenArticle from "./components/ChosenArticle";
 import Comments from "./components/Comments";
 import LoginForm from "./components/LoginForm";
+import NavBar from "./components/NavBar";
 
 import React, { Component } from "react";
 
@@ -23,6 +24,8 @@ export default class App extends Component {
           isLoggedIn={this.state.isLoggedIn}
           loggedInAs={this.state.loggedInAs}
         />
+        <NavBar />
+
         <Router>
           <Articles path="/" />
           <Articles path="/articles/:topic" />

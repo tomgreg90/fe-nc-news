@@ -1,0 +1,19 @@
+.articleSorter {
+  text-align: center;
+}
+
+@media only screen and (max-width: 486px) {
+  .label {
+    display: block;
+    margin: 5px;
+  }
+  .dropdown {
+    display: block;
+    margin: 0 auto;
+    padding: 5px;
+  }
+  .radio {
+    display: block;
+    padding: 5px;
+  }
+}

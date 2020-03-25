@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { fetchComments, postComment, deleteComment } from "../api";
 import "./Comments.css";
-import TopicSelect from "./TopicSelect";
+import LoadingPage from "./LoadingPage";
 import PostComment from "./PostComment";
 import { increaseVotes } from "../api";
 import VotingError from "./VotingError";
@@ -15,13 +15,15 @@ export default class Comments extends Component {
     votingError: false,
     cannotDeleteComment: null,
     errorComment: null,
-    deleteError: false
+    deleteError: false,
+    isLoading: false
   };
   render() {
     return (
       <div>
-        <TopicSelect />
-        {this.state.deleteError ? (
+        {this.state.isLoading ? (
+          <LoadingPage />
+        ) : this.state.deleteError ? (
           <ErrorPage error={this.state.error} />
         ) : (
           <div>
@@ -29,12 +31,11 @@ export default class Comments extends Component {
               loginInfo={this.props.loginInfo}
               article_id={this.props.article_id}
               createNewComment={this.createNewComment}
-            />
-            :{" "}
+            />{" "}
             <ul>
               {this.state.comments.map(comment => {
                 return (
-                  <li key={comment.comment_id}>
+                  <li key={comment.comment_id} className="myComment">
                     <h3 className="commentBy">By: {comment.author}</h3>
                     <h5 className="commentData">Votes: {comment.votes}</h5>
                     <h5 className="commentData">
@@ -59,10 +60,17 @@ export default class Comments extends Component {
                         Vote for this comment?{" "}
                         <button
                           onClick={() => {
-                            this.upVoteComment(comment.comment_id);
+                            this.voteComment(comment.comment_id, 1);
                           }}
                         >
-                          Yes
+                          Up
+                        </button>
+                        <button
+                          onClick={() => {
+                            this.voteComment(comment.comment_id, -1);
+                          }}
+                        >
+                          Down
                         </button>
                       </h5>
                     </div>
@@ -86,44 +94,50 @@ export default class Comments extends Component {
   }
   createNewComment = (article, comment, user) => {
     postComment(article, comment, user)
-      .then(comment => {
+      .then(newComment => {
         this.setState(currentState => {
-          return { comments: [comment, ...currentState.comments] };
+          return {
+            comments: [newComment, ...currentState.comments],
+            isLoading: false
+          };
         });
       })
       .catch(err => {
         this.setState({ hasError: true, error: err.response });
       });
+    this.setState({ isLoading: true });
   };
   removeComment = (comment_id, user) => {
     if (user === this.props.loginInfo.loggedInAs) {
-      deleteComment(comment_id)
-        .then(() => {
-          this.setState(currentState => {
-            return {
-              comments: currentState.comments.filter(comment => {
-                return comment.comment_id !== comment_id;
-              })
-            };
-          });
-        })
-        .catch(err => {
-          console.dir(err);
-          this.setState({ deleteError: true, error: err.response });
+      deleteComment(comment_id).catch(err => {
+        this.setState({ deleteError: true, error: err.response });
+        this.setState(prevState => {
+          return {
+            comments: [...prevState.comments]
+          };
         });
+      });
+
+      this.setState(currentState => {
+        return {
+          comments: currentState.comments.filter(comment => {
+            return comment.comment_id !== comment_id;
+          })
+        };
+      });
     } else {
       this.setState({ cannotDeleteComment: comment_id });
     }
   };
 
-  upVoteComment = id => {
+  voteComment = (id, amount) => {
     let commentIndex;
     for (let i = 0; i < this.state.comments.length; i++) {
       if (this.state.comments[i].comment_id === id) {
         commentIndex = i;
       }
     }
-    increaseVotes(id, "comments").catch(err => {
+    increaseVotes(id, "comments", amount).catch(err => {
       this.setState({ votingError: true, errorComment: id });
       this.setState(prevState => {
         prevState.comments[commentIndex].votes -= 1;
@@ -132,7 +146,7 @@ export default class Comments extends Component {
     });
     this.setState({ votingError: false });
     this.setState(prevState => {
-      prevState.comments[commentIndex].votes += 1;
+      prevState.comments[commentIndex].votes += amount;
       return { comments: prevState.comments };
     });
   };

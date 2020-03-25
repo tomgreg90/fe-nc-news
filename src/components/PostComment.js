@@ -7,7 +7,7 @@ export default class PostComment extends Component {
   render() {
     if (!this.state.postComment) {
       return (
-        <h3>
+        <h3 className="possibleComment">
           Click{" "}
           <button
             onClick={() => {
@@ -22,7 +22,7 @@ export default class PostComment extends Component {
     }
 
     return (
-      <div>
+      <div className="comment">
         {this.props.loginInfo.isLoggedIn ? (
           <div>
             <h5 className="commentPost">
@@ -31,6 +31,7 @@ export default class PostComment extends Component {
 
             <form onSubmit={this.handleSubmit}>
               <input
+                className="commentBody"
                 type="text"
                 required
                 onChange={event => {
@@ -38,7 +39,11 @@ export default class PostComment extends Component {
                 }}
                 value={this.state.body}
               />
-              <input type="submit" value="Submit Comment" />
+              <input
+                type="submit"
+                value="Submit Comment"
+                className="submitComment"
+              />
             </form>
           </div>
         ) : (

@@ -33,14 +33,14 @@ export const postComment = (article_id, comment, user) => {
 
 export const deleteComment = id => {
   return axios.delete(
-    `https://tomgreg-nc-news.herokuapp.com/api/comments/1000`
+    `https://tomgreg-nc-news.herokuapp.com/api/comments/${id}`
   );
 };
 
-export const increaseVotes = (id, section) => {
+export const increaseVotes = (id, section, amount) => {
   return axios
     .patch(`https://tomgreg-nc-news.herokuapp.com/api/${section}/${id}`, {
-      inc_votes: 1
+      inc_votes: amount
     })
     .then(({ data }) => {
       return data;

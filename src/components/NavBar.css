@@ -1,0 +1,46 @@
+h5 {
+  display: inline-block;
+  padding: 10px;
+  text-align: center;
+}
+nav {
+  text-align: center;
+  margin: 0 auto;
+}
+.splitNav {
+  display: inline-block;
+}
+
+@media only screen and (max-width: 486px) {
+  nav {
+    text-align: center;
+    margin: 0 auto;
+  }
+  h5 {
+    display: inline-block;
+    padding: 5px;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 230px) {
+  nav {
+    text-align: center;
+    margin: 0 auto;
+    width: fit-content;
+    height: fit-content;
+  }
+  .splitNav {
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+  }
+
+  h5 {
+    display: inline-block;
+    padding: 5px;
+    padding-bottom: 0;
+    text-align: center;
+    white-space: nowrap;
+  }
+}

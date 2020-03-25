@@ -2,4 +2,39 @@
   color: hotpink;
   background-color: white;
   border: solid salmon 3px;
+  text-align: center;
+}
+.possibleComment {
+  text-align: center;
+}
+.comment {
+  text-align: center;
+}
+
+@media only screen and (max-width: 486px) {
+  .possibleComment {
+    text-align: center;
+    font-size: 4vw;
+  }
+  .commentPost {
+    color: hotpink;
+    background-color: white;
+    border: solid salmon 3px;
+    text-align: center;
+    font-size: 4vw;
+  }
+  .submitComment {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 270px) {
+  .commentBody {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    height: 20vw;
+    width: 50vw;
+  }
 }

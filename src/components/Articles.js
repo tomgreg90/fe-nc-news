@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./Articles.css";
-import TopicSelect from "./TopicSelect";
+
 import { Link } from "@reach/router";
-import Loading from "./Loading";
+import LoadingPage from "./LoadingPage";
 import ErrorPage from "./ErrorPage";
 import { fetchArticles } from "../api";
 import ArticleSorter from "./ArticleSorter";
@@ -18,13 +18,12 @@ export default class Articles extends Component {
   render() {
     return (
       <div>
-        <TopicSelect />
         <ArticleSorter
           fetchSortedArticles={this.fetchSortedArticles}
           topic={this.props.topic}
         />
         {this.state.isLoading ? (
-          <Loading />
+          <LoadingPage />
         ) : this.state.hasError ? (
           <ErrorPage error={this.state.error} />
         ) : (

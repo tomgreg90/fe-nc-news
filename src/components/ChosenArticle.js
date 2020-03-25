@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
-import TopicSelect from "./TopicSelect";
+
 import "./ChosenArticle.css";
 import ErrorPage from "./ErrorPage";
 import { Link } from "@reach/router";
-import Loading from "./Loading";
+import LoadingPage from "./LoadingPage";
 import { increaseVotes } from "../api";
 import VotingError from "./VotingError";
 
@@ -22,14 +22,14 @@ export default class ChosenArticle extends Component {
 
     return (
       <div>
-        <TopicSelect />
         {this.state.isLoading ? (
-          <Loading />
+          <LoadingPage />
         ) : this.state.hasError ? (
           <ErrorPage error={this.state.error} />
         ) : (
-          <article className="myArticle">
+          <article className="article">
             <h3 className="title">{article.title}</h3>
+
             <h5>By {article.author}</h5>
             <h5>Created at {article.created_at}</h5>
             <p className="body">{article.body}</p>
