@@ -6,12 +6,11 @@ import ChosenArticle from "./components/ChosenArticle";
 import Comments from "./components/Comments";
 import LoginForm from "./components/LoginForm";
 import NavBar from "./components/NavBar";
-
+import ErrorPage from "./components/ErrorPage";
 import React, { Component } from "react";
 
 export default class App extends Component {
   state = {
-    isLoggedIn: true,
     loggedInAs: "jessjelly"
   };
 
@@ -21,7 +20,6 @@ export default class App extends Component {
         <Header />
         <LoginForm
           createNewUser={this.createNewUser}
-          isLoggedIn={this.state.isLoggedIn}
           loggedInAs={this.state.loggedInAs}
         />
         <NavBar />
@@ -32,14 +30,15 @@ export default class App extends Component {
 
           <ChosenArticle path="/articlesById/:article_id" />
           <Comments
-            loginInfo={this.state}
+            loggedInAs={this.state.loggedInAs}
             path="/articlesById/:article_id/comments"
           />
+          <ErrorPage default error={null} />
         </Router>
       </div>
     );
   }
   createNewUser = user => {
-    this.setState({ isLoggedIn: true, loggedInAs: user });
+    this.setState({ loggedInAs: user });
   };
 }

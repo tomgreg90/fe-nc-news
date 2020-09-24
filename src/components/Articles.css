@@ -1,4 +1,4 @@
-li {
+/* li {
   list-style-type: none;
   padding: 10px;
   border: solid salmon 5px;
@@ -7,7 +7,7 @@ li {
   background-color: white;
   text-align: center;
   list-style-position: inside;
-}
+} */
 ul {
   display: flex;
   flex-direction: column;

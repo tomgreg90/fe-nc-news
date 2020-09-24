@@ -12,7 +12,7 @@ export default class Articles extends Component {
     articles: [],
     isLoading: true,
     hasError: false,
-    error: null
+    error: null,
   };
 
   render() {
@@ -28,9 +28,9 @@ export default class Articles extends Component {
           <ErrorPage error={this.state.error} />
         ) : (
           <ul>
-            {this.state.articles.map(article => {
+            {this.state.articles.map((article) => {
               return (
-                <li key={article.article_id}>
+                <li key={article.article_id} className="w3-ul">
                   <Link to={`/articlesById/${article.article_id}`}>
                     {" "}
                     <p>{article.title}</p>
@@ -46,34 +46,34 @@ export default class Articles extends Component {
 
   componentDidMount() {
     fetchArticles(this.props.topic)
-      .then(articles => {
+      .then((articles) => {
         this.setState({ articles, isLoading: false, hasError: false });
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({
           isLoading: false,
           hasError: true,
-          error: err.response
+          error: err.response,
         });
       });
   }
   componentDidUpdate(prevProps) {
     if (this.props.topic !== prevProps.topic) {
       fetchArticles(this.props.topic)
-        .then(articles => {
+        .then((articles) => {
           this.setState({ articles, hasError: false });
         })
-        .catch(err => {
+        .catch((err) => {
           this.setState({
             isLoading: false,
             hasError: true,
-            error: err.response
+            error: err.response,
           });
         });
     }
   }
   fetchSortedArticles = (topic, sort_by, order) => {
-    fetchArticles(topic, sort_by, order).then(articles => {
+    fetchArticles(topic, sort_by, order).then((articles) => {
       this.setState({ articles });
     });
   };

@@ -15,7 +15,6 @@ export default class ArticleSorter extends Component {
           className="dropdown"
           id="articleForm"
           onChange={event => {
-            console.log(event.target.value);
             this.setState({ sort_by: event.target.value });
             this.props.fetchSortedArticles(
               this.props.topic,

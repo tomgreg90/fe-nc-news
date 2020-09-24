@@ -5,7 +5,7 @@ export default class LoginForm extends Component {
   state = { userInput: null };
 
   render() {
-    if (this.props.isLoggedIn)
+    if (this.props.loggedInAs)
       return (
         <h3 className="loginName">Logged in as: {this.props.loggedInAs}</h3>
       );

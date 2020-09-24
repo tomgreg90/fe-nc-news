@@ -3,17 +3,28 @@ import "./ErrorPage.css";
 import { Link } from "@reach/router";
 
 export default function ErrorPage(props) {
-  let message = "could not load Page!!";
-  if (props.error.data.msg) message = props.error.data.msg;
-  return (
-    <div>
-      <h3>
-        Error {props.error.status}, {message}
-      </h3>
+  const message = "Error, page does not exist!!";
 
-      <h3>
-        Click <Link to="/">Here</Link> to return to articles
-      </h3>
-    </div>
-  );
+  if (props.error) {
+    return (
+      <div>
+        <h3>
+          Error {props.error.status}, {props.error.data.message}
+        </h3>
+
+        <h3>
+          Click <Link to="/">Here</Link> to return to home!
+        </h3>
+      </div>
+    );
+  } else
+    return (
+      <div>
+        <h3>{message}</h3>
+
+        <h3>
+          Click <Link to="/">Here</Link> to return to home!
+        </h3>
+      </div>
+    );
 }

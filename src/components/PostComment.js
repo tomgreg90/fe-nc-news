@@ -23,10 +23,10 @@ export default class PostComment extends Component {
 
     return (
       <div className="comment">
-        {this.props.loginInfo.isLoggedIn ? (
+        {this.props.loggedInAs ? (
           <div>
             <h5 className="commentPost">
-              Posting Comment as: {this.props.loginInfo.loggedInAs}
+              Posting Comment as: {this.props.loggedInAs}
             </h5>
 
             <form onSubmit={this.handleSubmit}>
@@ -61,7 +61,7 @@ export default class PostComment extends Component {
     this.props.createNewComment(
       this.props.article_id,
       this.state.body,
-      this.props.loginInfo.loggedInAs
+      this.props.loggedInAs
     );
     this.setState({ body: "" });
   };
